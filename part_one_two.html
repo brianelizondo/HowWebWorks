@@ -1,0 +1,66 @@
+<!-- 
+How Web Works Exercise
+
+Part One: Solidify Terminology
+In your own terms, define the following terms:
+
+1. What is HTTP?
+HTTP is short for "Hyper Text Transfer Protocol". HTTP defines how data is formatted and transmitted and what actions web servers and browsers should take in response to different commands or responses.
+
+2. What is a URL?
+URL is short for "Uniform Resource Locator". URL is nothing more than an address that is given to a single resource on the Web, each valid URL points to a single resource and these resources can be HTML pages, CSS documents, images, etc.
+
+3. What is DNS?
+DNS is short for "Domain Name System". DNS is the system that makes it possible for us to browse the Internet, since it points the domains to the corresponding server and serves as an interpreter between us and the machine by translating the IP address (a numerical sequence) to a domain name (the name of a website). DNS is like a database whose function is to translate the request for a name, www.example.com, into a specific IP number 207.142.131.234.
+
+4. What is a query string?
+The query string is a string that sends information or additional data to the servers which can be used by the server or by javascript to make changes to the page, they are data that is obtained through the URL of the domain that is being visited.
+
+5. What are two HTTP verbs and how are they different?
+GET: requests without side effects (ie, don’t change server data) and typically, arguments are passed along in query string.
+POST: requests with side effects (ie, change data on server) and typically, arguments sent as body of the request (not in query string). Always do this if there’s a side-effect: sending mail, charge credit card, etc.
+
+6. What is an HTTP request?
+When you point your browser to a webpage on a server, your browser makes a request to that server. This is almost always a GET request and it contains the exact URL you want.
+
+7. What is an HTTP response?
+After a HTTP request the server response with the exact HTML text for that page. It’s often the case, though, that the web server itself will have to do some work to get the page you want, often interacting with other things, such as database servers. The server response have diferents response code like a: 200 for OK, 301 for you requested is elsewhere, 404 not found, 500 Server had an internal problem, etc.
+
+8. What is an HTTP header? Give a couple examples of request and response headers you have seen.
+HTTP headers are the central part of requests and responses, they also transmit information about the client's browser, the requested page, the server, etc.
+
+Example:
+GET
+scheme:     https
+host:       www.springboard.com
+filename:   /website-builder-assets/87dc800d3dc653c08d41fa8bd27ba2656d2f82d3/dist/JobGuarantee-b7fe80f1473e296fdb2c.js
+Status:     200 OK
+Version:    HTTP/2
+
+
+Part Two: Practice Tools
+1. Using curl, make a GET request to the icanhazdadjoke.com API to find all jokes involving the word “pirate”
+{
+    "current_page":1,
+    "limit":20,
+    "next_page":1,
+    "previous_page":1,
+    "results":
+    [{
+        "id":"exXSCtkOKe",
+        "joke":"Why do pirates not know the alphabet? They always get stuck at \"C\"."
+    },{
+        "id":"SnOf2gqjiqc",
+        "joke":"Why are pirates called pirates? Because they arrr!"
+    }],
+    "search_term":"pirates",
+    "status":200,
+    "total_jokes":2,
+    "total_pages":1
+}
+
+
+2. Use dig to find what the IP address is for icanhazdadjoke.com
+ 172.24.48.1
+
+-->
