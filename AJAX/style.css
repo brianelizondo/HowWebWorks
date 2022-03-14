@@ -1,0 +1,40 @@
+body{
+    height: 100vh;
+    background-image: linear-gradient(gray, black);
+}
+h1{
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    width: 100%;
+}
+form{
+    width: 100%;
+    text-align: center;
+}
+input{
+    font-size: 12px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 2px #555 solid;
+}
+#btn_search, #btn_remove{
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 2px #333 solid;
+}
+#btn_search{
+    background-color: #444;
+}
+#btn_remove{
+    background-color: red;
+}
+#btn_search:hover, #btn_remove:hover{
+    cursor: pointer;
+}
+#giphy_images{
+    padding: 50px 50px;
+}
