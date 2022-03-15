@@ -6,14 +6,24 @@
 // You can click on this URL and see the JSON you will get back. To view this in a nicer format, we highly recommend using the JSON Viewer chrome extension. This is also the data you should console.log when the form is submitted.
 
 let api_key = 'MhAodEJIJxQMxW9XqxKjyXfNYdLoOIym';
+const giphy_images = document.querySelector('#giphy_images');
+
 async function getGiphy(search){
     try {
         const url = 'http://api.giphy.com/v1/gifs/search';
         const resp = await axios.get(url, {params: {q: search, api_key }});
-        console.log(resp);
+        appendGIF(resp.data.data[0].images.original.url);
     } catch (e) {
         alert("Search term not found for GIPHY");
     }
+}
+
+// Part 2: Appending GIFs
+// Now that you’re communicating properly with the API, you should do something more interesting with the response data. Instead of logging it, grab a GIF from the response data and append the GIF to the page. Ensure that if you submit the form multiple times, you’ll get multiple GIFs showing up.
+function appendGIF(url){
+    let gifImage = document.createElement('img');
+    gifImage.setAttribute('src', url);
+    giphy_images.append(gifImage);
 }
 
 const search_form = document.querySelector('#search_form');
