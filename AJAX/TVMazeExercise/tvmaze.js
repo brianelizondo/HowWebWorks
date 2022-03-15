@@ -17,7 +17,7 @@ async function searchShows(query) {
   // Remove hard coded data.
   try {
     const resp = await axios.get('https://api.tvmaze.com/search/shows', {params: {q: query }});
-    // set a new array with the shows info (id, name, summary, image, url)
+    // set a new array with the shows info (id, name, summary, image, genres)
     let showsArr = [];
     for(let showData of resp.data) {
       let showInfo = {};
@@ -25,7 +25,7 @@ async function searchShows(query) {
       showInfo.name = showData.show.name;
       showInfo.summary = showData.show.summary;
       showInfo.image = showData.show.image;
-      showInfo.url = showData.show.url;
+      showInfo.genres = showData.show.genres;
       showsArr.push(showInfo);
     }
     return showsArr;
@@ -43,10 +43,11 @@ function populateEpisodes(episodes){
   $("#episodes-area").show();
   // empty the area if it is filled with information
   const $episodesList = $("#episodes-list");
+  $episodesList.addClass('list-group');
   $episodesList.empty();
   // show the info of all episodes to DOM
   for (let episode of episodes) {
-    let $episodeInfo = $(`<li>${episode.name} (season ${episode.season}, number ${episode.number})</li>`);
+    let $episodeInfo = $(`<li class="list-group-item">${episode.name} (season ${episode.season}, number ${episode.number})</li>`);
     $episodesList.append($episodeInfo);
   }
 }
@@ -69,8 +70,20 @@ function populateShows(shows) {
   let showImage = 'generic_image.png';
 
   for (let show of shows) {
+    // check if the show has image
     if(show.image != null){ showImage = show.image.medium; }
 
+    // list the genres of the show
+    let showGenres = '';
+    if(show.genres.length > 0){
+      let genresArr = show.genres;
+      let genresList = '';
+      genresArr.forEach(function(genres){
+        genresList += `${genres}, `;
+      });
+      showGenres = `<p class="card-text"><b>Genres: </b>${genresList}</p>`;
+    }
+    
     let $item = $(`
       <div class="col-md-6 col-lg-3 Show" data-show-id="${show.id}">
         <div class="card" data-show-id="${show.id}">
@@ -78,6 +91,7 @@ function populateShows(shows) {
           <div class="card-body">
             <h5 class="card-title">${show.name}</h5>
             <p class="card-text">${show.summary}</p>
+            ${showGenres}
             <button class="btn btn-info getEpisodes">Episodes</button>
           </div>
         </div>
