@@ -19,14 +19,19 @@ async function searchShows(query) {
   // TODO: Make an ajax request to the searchShows api.  
   // Remove hard coded data.
   try {
-      const resp = await axios.get('https://api.tvmaze.com/search/shows', {params: {q: query }});
-      let showsArr = [];
-      for(let showData of resp.data) {
-        showsArr.push(showData.show);
-      }
-      return showsArr;
+    const resp = await axios.get('https://api.tvmaze.com/search/shows', {params: {q: query }});
+    let showsArr = [];
+    for(let showData of resp.data) {
+      let showInfo = {};
+      showInfo.id = showData.show.id;
+      showInfo.name = showData.show.name;
+      showInfo.summary = showData.show.summary;
+      showInfo.image = showData.show.image;
+      showsArr.push(showInfo);
+    }
+    return showsArr;
   } catch (e) {
-      alert("Search term not found in TVmaze");
+    alert("Search term not found in TVmaze");
   }
 }
 
@@ -38,19 +43,21 @@ async function searchShows(query) {
 function populateShows(shows) {
   const $showsList = $("#shows-list");
   $showsList.empty();
+  let showImage = 'generic_image.png';
 
   for (let show of shows) {
-    let $item = $(
-      `<div class="col-md-6 col-lg-3 Show" data-show-id="${show.id}">
-         <div class="card" data-show-id="${show.id}">
-           <div class="card-body">
-             <h5 class="card-title">${show.name}</h5>
-             <p class="card-text">${show.summary}</p>
-           </div>
-         </div>
-       </div>
-      `);
-
+    if(show.image != null){ showImage = show.image.medium; }
+    let $item = $(`
+      <div class="col-md-6 col-lg-3 Show" data-show-id="${show.id}">
+        <div class="card" data-show-id="${show.id}">
+          <div class="card-body">
+            <img class="card-img-top" src="${showImage}">
+            <h5 class="card-title">${show.name}</h5>
+            <p class="card-text">${show.summary}</p>
+          </div>
+        </div>
+      </div>
+    `);
     $showsList.append($item);
   }
 }
